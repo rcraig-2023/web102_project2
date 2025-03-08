@@ -2,7 +2,7 @@
 
 Submitted by: **Rica Craig**
 
-This web app: **This app is designed to help the end-user memorize the painter, painting, and museum names associated with each famous painting.**
+This web app: **This app helps users memorize the names of painters, paintings, and museums associated with famous paintings.**
 
 Time spent: **10** hours spent in total
 
