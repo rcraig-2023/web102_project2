@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img url='https://imgur.com/a/olqan7Z' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+https://imgur.com/a/olqan7Z
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with QuickTime Player and VEED.IO
