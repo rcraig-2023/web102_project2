@@ -1,49 +1,86 @@
 body {
   font-family: sans-serif;
   background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .app {
-  text-align: center;
-  padding: 20px;
+  text-align: center !important;
   max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .flashcard {
   border: 1px solid #ccc;
   padding: 30px;
   margin: 20px auto;
-  width: 500px;
+  width: 80%;
+  max-width: 500px;
+  height: 350px;
   cursor: pointer;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  transition: transform 0.8s; 
-  transform-style: preserve-3d; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.flashcard-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: center;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
 }
 
 .flashcard-front,
 .flashcard-back {
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; 
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flashcard-front img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
 }
 
 .flashcard-back {
-  transform: rotateY(180deg); 
-}
-
-.flashcard.flipped {
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
-.flashcard img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+.flashcard-back h3,
+.flashcard-back p {
+  font-size: 16px;
+  text-align: center;
 }
 
 .navigation {
@@ -51,7 +88,7 @@ body {
 }
 
 .navigation button {
-  background-color: #008CBA;
+  background-color: #008cba;
   border: none;
   color: white;
   padding: 10px 20px;

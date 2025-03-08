@@ -7,70 +7,41 @@ import './App.css';
 
 function App() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false); // State for showing answer
 
   useEffect(() => {
     setCurrentCardIndex(Math.floor(Math.random() * paintings.length));
   },);
 
   const nextCard = () => {
-    let nextIndex = currentCardIndex + 1;
-    if (nextIndex >= paintings.length) {
-      nextIndex = 0;
-    }
-    setCurrentCardIndex(nextIndex);
-    setShowAnswer(false);
+    setShowAnswer(false); // Reset showAnswer when moving to the next card
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % paintings.length);
   };
 
   const prevCard = () => {
-    let prevIndex = currentCardIndex - 1;
-    if (prevIndex < 0) {
-      prevIndex = paintings.length - 1;
-    }
-    setCurrentCardIndex(prevIndex);
-    setShowAnswer(false);
+    setShowAnswer(false); // Reset showAnswer when moving to the previous card
+    setCurrentCardIndex((prevIndex) =>
+      prevIndex === 0 ? paintings.length - 1 : prevIndex - 1
+    );
   };
 
   const toggleAnswer = () => {
-    setShowAnswer(!showAnswer);
+    setShowAnswer((prevState) => !prevState);
   };
-
-  const getCardColor = (difficulty) => {
-    if (difficulty === "Easy") return "lightgreen";
-    if (difficulty === "Medium") return "lightyellow";
-    if (difficulty === "Hard") return "lightcoral";
-    return "";
-  };
-
-  const currentCard = paintings[currentCardIndex];
 
   return (
     <div className="app">
-      <h1>Famous Paintings</h1>
-      <h2>How good of an art enthusiast are you? Test your art knowledge</h2>
+      <h1>Famous Paintings Flashcards</h1>
+      <h3>Let's test your knowledge of paintings categorized by easy, medium, and hard levels!</h3>
       <p>
         Card {currentCardIndex + 1} of {paintings.length}
       </p>
-      {currentCard && (
-        <div
-          className={`flashcard ${showAnswer ? "flipped" : ""}`}
-          onClick={toggleAnswer}
-          style={{ backgroundColor: getCardColor(currentCard.difficulty) }}
-        >
-          <div className="flashcard-front">
-            <img
-              src={currentCard.image}
-              alt={currentCard.painting}
-              style={{ maxWidth: "300px", maxHeight: "200px" }}
-            />
-          </div>
-          <div className="flashcard-back">
-            <p>Painter: {currentCard.painter}</p>
-            <p>Painting: {currentCard.painting}</p>
-            <p>Museum: {currentCard.museum}</p>
-          </div>
-        </div>
-      )}
+      <Flashcard
+        card={paintings[currentCardIndex]}
+        newCard={nextCard}
+        showAnswer={showAnswer} // Pass showAnswer state
+        toggleAnswer={toggleAnswer} // Pass toggleAnswer function
+      />
       <div className="navigation">
         <button onClick={prevCard}>{"<"}</button>
         <button onClick={nextCard}>{">"}</button>
@@ -80,3 +51,5 @@ function App() {
 }
 
 export default App;
+
+

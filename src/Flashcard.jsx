@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Flashcard({ card, newCard }) {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -7,36 +7,35 @@ function Flashcard({ card, newCard }) {
     setShowAnswer(!showAnswer);
   };
 
-  let cardColor = '';
-  if (card.difficulty === 'Easy') {
-    cardColor = 'lightgreen';
-  } else if (card.difficulty === 'Medium') {
-    cardColor = 'lightyellow';
-  } else if (card.difficulty === 'Hard') {
-    cardColor = 'lightcoral';
+  let cardColor = "";
+  if (card.difficulty === "Easy") {
+    cardColor = "lightgreen";
+  } else if (card.difficulty === "Medium") {
+    cardColor = "lightyellow";
+  } else if (card.difficulty === "Hard") {
+    cardColor = "lightcoral";
   }
 
   return (
     <div
-      className="flashcard"
+      className={`flashcard ${showAnswer ? "flipped" : ""}`}
       onClick={toggleAnswer}
       style={{ backgroundColor: cardColor }}
     >
-      <img
-        src={card.image}
-        alt={card.painting}
-        style={{ maxWidth: '300px', maxHeight: '200px' }}
-      />
-      {showAnswer ? (
-        <div>
+      <div className="flashcard-inner">
+        <div className="flashcard-front">
+          <img
+            src={card.image}
+            alt={card.painting}
+            style={{ maxWidth: "300px", maxHeight: "200px" }}
+          />
+        </div>
+        <div className="flashcard-back">
           <p>Painter: {card.painter}</p>
           <p>Painting: {card.painting}</p>
           <p>Museum: {card.museum}</p>
         </div>
-      ) : (
-        <p>Click to reveal answer</p>
-      )}
-      <button onClick={(e) => { e.stopPropagation(); newCard(); }}>Next Card</button>
+      </div>
     </div>
   );
 }
